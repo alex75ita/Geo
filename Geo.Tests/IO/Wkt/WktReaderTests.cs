@@ -13,21 +13,21 @@ namespace Geo.Tests.IO.Wkt
         public void Invalid_geometry_type()
         {
             var reader = new WktReader();
-            Assert.Throws<Exception>(() => reader.Read("SOMETHING EMPTY"));
+            Assert.Throws<System.Runtime.Serialization.SerializationException>(() => reader.Read("SOMETHING EMPTY"));
         }
 
         [Test]
         public void Null_input_string_throws_argument_exception()
         {
             var reader = new WktReader();
-            Assert.Throws<Exception>(() => reader.Read((string)null));
+            Assert.Throws<ArgumentNullException>(() => reader.Read((string)null));
         }
 
         [Test]
         public void Null_input_stream_throws_argument_exception()
         {
             var reader = new WktReader();
-            Assert.Throws<Exception>( () => reader.Read((Stream)null));
+            Assert.Throws<ArgumentNullException>( () => reader.Read((Stream)null));
         }
 
         [Test]
