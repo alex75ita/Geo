@@ -19,5 +19,21 @@ namespace Geo.Tests.Gps.Serialization
                 Assert.That(data, Is.EqualTo(null));
             }
         }
+
+        [Test]
+        public void GpxFilesTest()
+        {
+            var dir = GetReferenceFileDirectory("gpx").EnumerateFiles();
+            foreach (var fileInfo in dir)
+            {
+                using (var stream = new FileStream(fileInfo.FullName, FileMode.Open))
+                {
+                    var data = GpsData.Parse(stream);
+
+                    Assert.That(data, Is.Not.Null);
+                }
+                
+            }
+        }
     }
 }
