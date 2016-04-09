@@ -7,7 +7,9 @@ namespace Geo.Tests.Gps.Serialization
     {
         protected DirectoryInfo GetReferenceFileDirectory(params string[] subDirectories)
         {
-            var dir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            // this in Debug mode returns "C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\TESTWINDOW"
+            //var dir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            var dir = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory);
             while (dir != null)
             {
                 var refDir = dir.EnumerateDirectories().FirstOrDefault(x => x.Name == "reference");
@@ -34,5 +36,6 @@ namespace Geo.Tests.Gps.Serialization
 
             return dir;
         }
+
     }
 }
