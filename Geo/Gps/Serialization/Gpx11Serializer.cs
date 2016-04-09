@@ -244,7 +244,7 @@ namespace Geo.Gps.Serialization
                     track.Metadata.Attribute(x => x.Description, trkType.desc);
                     track.Metadata.Attribute(x => x.Comment, trkType.cmt);
 
-                    foreach (var trksegType in trkType.trkseg)
+                    foreach (var trksegType in trkType.trkseg.Where(seg => seg.trkpt != null))
                     {
                         var segment = new TrackSegment();
                         foreach (var wptType in trksegType.trkpt)
@@ -252,7 +252,7 @@ namespace Geo.Gps.Serialization
                             var fix = new Fix((double)wptType.lat, (double)wptType.lon, (double)wptType.ele, wptType.time);
                             segment.Fixes.Add(fix);
                         }
-                        track.Segments.Add(segment);
+                        track.Segments.Add(segment);             
                     }
                     data.Tracks.Add(track);
                 }
